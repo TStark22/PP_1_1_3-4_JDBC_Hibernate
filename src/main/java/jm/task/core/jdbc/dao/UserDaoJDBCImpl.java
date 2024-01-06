@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-    public final Connection connection = Util.getConnection();
+    private Connection connection = Util.getConnection();
 
     public UserDaoJDBCImpl() {
     }
@@ -29,7 +29,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void dropUsersTable() {
-        String sql = "DROP TABLE users;";
+        String sql = "DROP TABLE IF EXISTS users;";
 
         try (Statement statement = connection.createStatement()) {
             statement.execute(sql);
@@ -44,6 +44,7 @@ public class UserDaoJDBCImpl implements UserDao {
         String sql = "INSERT INTO users(name, lastName, age) VALUES(?, ?, ?);";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
 //            System.out.println("Метод запущен, соединение закрыто?: " + connection.isClosed());
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
@@ -53,11 +54,6 @@ public class UserDaoJDBCImpl implements UserDao {
             System.out.printf("User с именем – %S добавлен в базу данных\n", name);
 
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
             throw new RuntimeException(e);
         }
     }

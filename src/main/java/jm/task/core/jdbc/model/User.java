@@ -69,16 +69,4 @@ public class User {
                 ", age=" + age +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User user)) return false;
-        return Objects.equals(name, user.name) && Objects.equals(lastName, user.lastName) && Objects.equals(age, user.age);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, lastName, age);
-    }
 }
