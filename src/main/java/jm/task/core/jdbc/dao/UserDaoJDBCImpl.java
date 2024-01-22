@@ -33,7 +33,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
         try (Statement statement = connection.createStatement()) {
             statement.execute(sql);
-            System.out.println("Таблице пи**а!!!");
+            System.out.println("Таблице уничтожена!!!");
         } catch (SQLException e) {
             System.out.println("Ошибка в БД!");
             throw new RuntimeException(e);
@@ -87,7 +87,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 usersList.add(user);
             }
 
-            System.out.println("*писяк сформирван!!");
+            System.out.println("Список сформирван!!");
         } catch (SQLException e) {
             System.out.println("Ошибка в БД!");
             throw new RuntimeException(e);
